@@ -105,7 +105,7 @@ const updateVideogame = async (id, videogameData) => {
  * @param {number} id - El ID del videojuego a eliminar.
  * @returns {Promise<number>} Devuelve 1 si se borró el registro, 0 si no existía.
  */
-const deleteVideogame = async (id) => {
+const removeVideogame = async (id) => {
   return await db('videogames').where({ id }).del();
 }
 
@@ -114,5 +114,5 @@ module.exports = {
   findVideogameById,
   addVideogame,
   updateVideogame,
-  deleteVideogame
+  removeVideogame
 }
