@@ -1,6 +1,6 @@
 // Este archivo implementa todas las operaciones que se han definido en el /router/videogamesRouter.js
 
-const { findAllVideogames, findVideogameById, addVideogame, updateVideogame } = require('../service/videogamesService');
+const { findAllVideogames, findVideogameById, addVideogame, updateVideogame, removeVideogame } = require('../service/videogamesService');
 
 /**
  * Obtiene el listado completo de videojuegos.
@@ -83,7 +83,7 @@ const postVideogame = async (req, res, next) => {
 /**
  * Actualiza un videojuego por su ID.
  * Reemplaza los datos de un videojuego con los dados en el cuerpo de la petición.
-* @param {import('express').Request} req - Objeto de petición.
+ * @param {import('express').Request} req - Objeto de petición.
  * @param {import('express').Response} res - Objeto de respuesta.
  * @param {import('express').NextFunction} next - Función middleware para manejo de errores.
  * @return {Promise<void>} Devuelve una respuesta JSON con código 200 y los datos del videojuego actualizado, o 404 si no se encuentra el juego.
@@ -117,9 +117,42 @@ const putVideogame = async (req, res, next) => {
   }
 }
 
+/**
+ * Elimina un videojuego por su ID. 
+ * @param {import('express').Request} req - Objeto de petición.
+ * @param {import('express').Response} res - Objeto de respuesta.
+ * @param {import('express').NextFunction} next - Función middleware para manejo de errores.
+ * @return {Promise<void>} Devuelve una respuesta JSON con código 200 si el videojuego ha sido eliminado, o 404 si no se encuentra el juego.
+ */
+const deleteVideogame = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    
+    const deletedCount = await removeVideogame(id);
+
+    if (deletedCount === 0) {
+      return res.status(404).json({
+        code: 404,
+        title: 'not-found',
+        message: `Videogame with id ${id} not found`
+      });
+    }
+
+    res.status(200).json({
+      code: 200,
+      title: 'success',
+      message: 'Videogame deleted successfully'
+    });
+
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   getAllVideogames,
   getVideogameById,
   postVideogame,
-  putVideogame
+  putVideogame,
+  deleteVideogame
 }
