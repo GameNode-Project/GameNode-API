@@ -85,6 +85,13 @@ const validateAddVideogame = [
   validateResult
 ]
 
+/**
+ * Cadena de validaciones para la actualización completa de un videojuego.
+ * Se aplica a la ruta PUT /:id.
+ * * Reglas:
+ * 1. El parámetro 'id' debe existir en la URL y ser un número entero positivo.
+ * 2. El cuerpo de la petición debe cumplir las mismas reglas que la creación (POST).
+ */
 const validateUpdateVideogame = [
   param('id')
     .notEmpty().withMessage('ID is required')
