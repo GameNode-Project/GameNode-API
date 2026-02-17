@@ -83,9 +83,44 @@ const addConsole = async (consoleData) => {
     return newId;
 }
 
+/**
+ * Actualiza la informacion de la consola existente.
+ * Actualiza los datos basicos y si se proporcionan videojuegos, actualiza las relaciones correspondientes en la tabla intermedia.
+ * @param {number} id - El id de la consola a actualizar. 
+ * @param {*} consoleData - Objeto con los datos de la consola a actualizar.
+ * @return {Promise<void>} Devuelve una promesa que se resuelve cuando la consola ha sido actualizada correctamente.
+ */
+const updateConsole = async (id, consoleData) => {
+    const { name, company_id, release_year, price, url } = consoleData;
+    await db('consoles')
+        .where({id: id})
+        .update({
+            name,
+            company_id,
+            release_year,
+            price,
+            url
+    });
+
+        if(consoles != undefined) {
+            await db('videogame_console')
+                .where({ 'console_id': id })
+                .del();
+        
+        if(consoles.length > 0) {
+            const relations = consoles.map((videogameId) => ({
+                console_id: id,
+                videogame_id: videogameId
+            }));
+            await db('videogame_console').insert(relations);
+        }
+    }
+};
+
 module.exports = {
     findAllConsoles,
     findConsoleById,
-    addConsole
+    addConsole,
+    updateConsole
 }
 
