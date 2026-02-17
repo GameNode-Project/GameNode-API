@@ -52,8 +52,37 @@ const findConsoleById = async (id) => {
     return console;
 };
 
+/**
+ * Añade una nueva consola a la base de datos, y si se proporcionan videojuegos, también añade las relaciones 
+ * correspondientes en la tabla intermedia.
+ * @param {Object} consoleData - Objeto con los datos de la consola a añadir.
+ * @returns {Promise<number>} Devuelve una promesa que resuelve en el ID de la nueva consola creada.
+ */
+
+const addConsole = async (consoleData) => {
+    const { name, company_id, release_year, price, url } = consoleData;
+    const [newId] = await db('consoles').insert({
+        name,
+        company_id,
+        release_year,
+        price,
+        url
+    });
+    
+    if (consoles && consoles.length > 0) {
+        const relations = consoles.map((videogameId) => ({
+            console_id: newId,
+            videogame_id: videogameId
+        }));
+        await db('videogame_console').insert(relations);
+    }
+    
+    return newId;
+}
+
 module.exports = {
     findAllConsoles,
-    findConsoleById
+    findConsoleById,
+    addConsole
 }
 
