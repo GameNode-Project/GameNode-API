@@ -68,7 +68,18 @@ const validateAddConsole = [
     validateResult
 ];
 
+const validateUpdateConsole = [
+    param('id')
+        .notEmpty().withMessage('id is required')
+        .isInt({ gt: 0 }).withMessage('id must be a positive integer'),
+
+    ...validateAddConsole.slice(0, -1), 
+
+    validateResult
+]
+
 module.exports = {
     validateConsoleId,
-    validateAddConsole
+    validateAddConsole,
+    validateUpdateConsole
 }
