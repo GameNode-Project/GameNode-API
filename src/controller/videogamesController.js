@@ -77,7 +77,7 @@ const postVideogame = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-  };
+  }
 };
 
 /**
