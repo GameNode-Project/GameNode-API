@@ -80,7 +80,7 @@ const addVideogame = async (videogameData) => {
  * reemplaza las relaciones existentes por las nuevas.
  * @param {number} id - El ID del videojuego a actualizar.
  * @param {Object} videogameData - Objeto con los datos a actualizar (puede incluir 'consoles').
- * @returns {Promise<number>} Devuelve el ID del videojuego actualizado.
+ * @returns {Promise<void>} No devuelve ningún valor. Ejecuta la operación en la base de datos.
  */
 const updateVideogame = async (id, videogameData) => {
   const { consoles, ...videogameInfo } = videogameData;
