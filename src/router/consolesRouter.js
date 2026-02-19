@@ -6,8 +6,7 @@ const router = express.Router();
 const { getAllConsoles, getConsoleById, postConsole, putConsole, deleteConsole } = require('../controller/consolesController.js');
 const { validateConsoleId, validateAddConsole, validateUpdateConsole } = require('../validators/consoles.js');
 
-// Rutas
-
+// RUTAS
 router.get('/', getAllConsoles);
 router.get('/:id', validateConsoleId, getConsoleById);
 router.post('/', validateAddConsole, postConsole);
