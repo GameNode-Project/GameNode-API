@@ -81,15 +81,13 @@ const postConsole = async (req, res, next) => {
 };
 
 /**
- * Actualiza la consola por su id
- * Reemplaza toda la informacion de la consola por la nueva proporcionada en el body de la peticion.
- * @param {*} req - Objeto de la peticion
- * @param {*} res - Objeto de la respuesta
- * @param {*} next - Funcion middleware para manejo de errores
- * @returns {Promise<void>} Devuelve una respuesta JSON con codigo 200 y los datos de la consola actualizada,
- *                          o un error 404 si no se encuentra la consola.
+ * Actualiza los datos de una consola por su ID.
+ * Reemplaza los datos de una consola con los dados en el cuerpo de la petición.
+ * @param {import('express').Request} req - Objeto de petición.
+ * @param {import('express').Response} res - Objeto de respuesta.
+ * @param {import('express').NextFunction} next - Función middleware para manejo de errores.
+ * @returns {Promise<void>} Devuelve una respuesta JSON con código 200 y los datos de la consola actualizada, o un error 404 si no se encuentra la consola.
  */
-
 const putConsole = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -99,10 +97,10 @@ const putConsole = async (req, res, next) => {
 
         const updatedConsole = await findConsoleById(id);
 
-        if(!updatedConsole) {
+        if (!updatedConsole) {
             return res.status(404).json({
                 code: 404,
-                title: 'not found',
+                title: 'not-found',
                 message: `Console with id ${id} not found after update`
             });
         }
@@ -113,10 +111,11 @@ const putConsole = async (req, res, next) => {
             message: 'Console updated successfully',
             data: updatedConsole
         });
+
     } catch (error) {
         next(error);
     }
-}
+};
 
 /**
  * Elimina una consola por su id.
