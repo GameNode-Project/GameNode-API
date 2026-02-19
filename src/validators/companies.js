@@ -56,12 +56,19 @@ const validateAddCompany = [
     validateResult
 ];
 
+/**
+ * Cadena de validaciones para la actualización completa de una empresa.
+ * Se aplica a la ruta PUT /:id.
+ * * Reglas:
+ * 1. El parámetro 'id' debe existir en la URL y ser un número entero positivo.
+ * 2. El cuerpo de la petición debe cumplir las mismas reglas que la creación (POST).
+ */
 const validateUpdateCompany = [
     param('id')
         .notEmpty().withMessage('ID is required')
         .isInt({ gt: 0 }).withMessage('ID must be a positive integer'),
 
-    ...validateAddCompany.slice(0, -1), // Reutilizamos las validaciones de addCompany excepto el validateResult
+    ...validateAddCompany.slice(0, -1), 
 
     validateResult
 ];
