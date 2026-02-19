@@ -120,17 +120,19 @@ const putCompany = async (req, res, next) => {
 };
 
 /**
- * Metodo para eliminar una empresa por su id.
- * Valida si la empresa existe antes de eliminarla.
- * @param {Object} req - Objeto de petición de Express.
- * @param {Object} res - Objeto de respuesta de Express.
- * @returns {Promise<void>} Devuelve una respuesta JSON con código 200 y el mensaje de éxito o 404 si no existe la empresa.
+ * Elimina una empresa por su ID.
+ * @param {import('express').Request} req - Objeto de petición de Express.
+ * @param {import('express').Response} res - Objeto de respuesta de Express.
+ * @param {import('express').NextFunction} next - Función middleware para manejo de errores.
+ * @returns {Promise<void>} Devuelve una respuesta JSON con código 200 si la empresa ha sido eliminada, o 404 si no encuentra la empresa.
  */
 const deleteCompany = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const deleteCompany = await removeCompany(id);
-        if (deleteCompany === 0) {
+
+        const deletedCompany = await removeCompany(id);
+
+        if (deletedCompany === 0) {
             return res.status(404).json({
                 code: 404,
                 title: 'not-found',
@@ -142,6 +144,7 @@ const deleteCompany = async (req, res, next) => {
             title: 'success',
             message: `Company with id ${id} deleted successfully`,
         });
+
     } catch (error) {
         next(error);
     }
