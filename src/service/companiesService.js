@@ -44,13 +44,13 @@ const updateCompany = (async (id, companyData) => {
 });
 
 /**
- * Metodo para eliminar una empresa por su id.
- * @param {number} id 
+ * Elimina una empresa por su id.
+ * @param {number} id - El ID de la empresa a eliminar.
  * @returns {Promise<number>} Devuelve 1 si se eliminó la empresa, 0 si no se encontró.
  */
-const removeCompany = (async (id) => {
+const removeCompany = async (id) => {
     return await db('companies').where({id}).del();
-});
+};
 
 module.exports = {
     findAllCompanies,
