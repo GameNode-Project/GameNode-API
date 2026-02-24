@@ -1,8 +1,11 @@
 const express = require('express');
-const { config } = require('./configuration/config');
+const { config, swaggerDocument } = require('./configuration/config');
+const swaggerUi = require('swagger-ui-express');
 
 const app = express();
 app.use(express.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Zona de rutas.
 const companiesRouter = require('./router/companiesRouter');
