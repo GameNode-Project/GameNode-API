@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "node src/app.js --config config.local.yaml",
-    "dev": "nodemon src/app.js -- --config config.local.yaml",
+    "dev": "nodemon -e js, yaml src/app.js -- --config config.local.yaml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
