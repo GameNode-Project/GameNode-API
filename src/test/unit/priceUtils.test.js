@@ -1,4 +1,4 @@
-const { calculateDiscount, calculatePriceWithTax } = require('../../utils/priceUtils');
+const { calculatePriceWithTax } = require('../../utils/priceUtils');
 
 describe('Utils: priceUtils', () => {
 

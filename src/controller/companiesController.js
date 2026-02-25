@@ -77,7 +77,6 @@ const postCompany = async (req, res, next) => {
       data: newCompany
     });
   } catch (error) {
-    console.error(error);
     next(error);
   }
 };

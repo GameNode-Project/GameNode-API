@@ -27,7 +27,9 @@ app.use((req, res) => {
 });
 
 // Manejador de errores global, para capturar errores no controlados.
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
+  // eslint-disable-next-line no-console
   console.error(err.stack);
   res.status(500).json({
     code: 500,
@@ -38,5 +40,6 @@ app.use((err, req, res, next) => {
 
 const PORT = config.service.port || 8080;
 app.listen(PORT, () => {
-    console.log(`Backend iniciado en el puerto: ${PORT}`);
+  // eslint-disable-next-line no-console
+  console.log(`Backend iniciado en el puerto: ${PORT}`);
 });
