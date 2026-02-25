@@ -97,7 +97,11 @@ const addVideogame = async (videogameData) => {
 const updateVideogame = async (id, videogameData) => {
   const { consoles, ...videogameInfo } = videogameData;
 
-  await db("videogames").where({ id }).update(videogameInfo);
+  const updatedRows = await db("videogames").where({ id }).update(videogameInfo);
+
+  if (updatedRows === 0) {
+    return 0; 
+  }
 
   if (consoles !== undefined) {
     await db("videogame_console").where({ videogame_id: id }).del();
