@@ -37,7 +37,7 @@ const getAllConsoles = async (req, res, next) => {
       message: "Consoles retrieved successfully",
       data: consoleRetro,
     });
-    
+
   } catch (error) {
     next(error);
   }
@@ -55,18 +55,27 @@ const getConsoleById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const console = await findConsoleById(id);
+
     if (!console) {
       return res.status(404).json({
         code: 404,
         title: "not found",
-        message: `Videogame with id ${id} not found`,
+        message: `Console with id ${id} not found`,
       });
     }
+
+    const releaseDate = new Date(console.release_date);
+    
+    const consoleWithRetro = {
+      ...console,
+      retro: isRetro(releaseDate),
+    };
+
     res.status(200).json({
       code: 200,
       title: "success",
       message: "Console retrieved successfully",
-      data: console,
+      data: consoleWithRetro,
     });
   } catch (error) {
     next(error);
