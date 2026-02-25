@@ -1,6 +1,12 @@
 // Archivo que implementa las operaciones que se deficen en /router/companiesRouter.js
 
-const { findAllCompanies, findCompanyById, addCompany, updateCompany, removeCompany } = require('../service/companiesService');
+const {
+  findAllCompanies,
+  findCompanyById,
+  addCompany,
+  updateCompany,
+  removeCompany,
+} = require("../service/companiesService");
 
 /**
  * Obtien el listado de todas las empresas.
@@ -11,17 +17,17 @@ const { findAllCompanies, findCompanyById, addCompany, updateCompany, removeComp
  * @returns {Promise<void>} Devuelve una respuesta JSON son código 200 y los datos
  */
 const getAllCompanies = async (req, res, next) => {
-    try {
-        const companies = await findAllCompanies();
-        res.status(200).json({
-            code: 200,
-            title: 'success',
-            message: 'Companies retrieved successfully',
-            data: companies
-        });
-    } catch (error) {
-        next(error);
-    }
+  try {
+    const companies = await findAllCompanies();
+    res.status(200).json({
+      code: 200,
+      title: "success",
+      message: "Companies retrieved successfully",
+      data: companies,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 /**
@@ -33,25 +39,25 @@ const getAllCompanies = async (req, res, next) => {
  * @returns {Promise<void>} Devuelve una respuesta JSON con codigo 200 y los datos de la empresa o 404 si no existe.
  */
 const getCompanyById = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const company = await findCompanyById(id);
-        if (!company) {
-            return res.status(404).json({
-                code: 404,
-                title: 'not-found',
-                message: `Company with id ${id} not found`,
-            });
-        }
-        res.status(200).json({
-            code: 200,
-            title: 'success',
-            message: 'Company retrieved successfully',
-            data: company
-        })
-    } catch (error) {
-        next(error);
+  try {
+    const { id } = req.params;
+    const company = await findCompanyById(id);
+    if (!company) {
+      return res.status(404).json({
+        code: 404,
+        title: "not-found",
+        message: `Company with id ${id} not found`,
+      });
     }
+    res.status(200).json({
+      code: 200,
+      title: "success",
+      message: "Company retrieved successfully",
+      data: company,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 /**
@@ -67,17 +73,16 @@ const postCompany = async (req, res, next) => {
     const newId = await addCompany(companyData);
     const newCompany = {
       id: newId,
-      ...companyData     
-    }
+      ...companyData,
+    };
 
     res.status(201).json({
       code: 201,
-      title: 'created',
+      title: "created",
       message: `Company with name ${companyData.name} created successfully`,
-      data: newCompany
+      data: newCompany,
     });
   } catch (error) {
-    console.error(error);
     next(error);
   }
 };
@@ -91,32 +96,31 @@ const postCompany = async (req, res, next) => {
  * @returns {Promise<void>} Devuelve una respuesta JSON con código 200 y los datos actualizados, o 404 si no se encuentra la empresa.
  */
 const putCompany = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const companyData = req.body;
-        
-        await updateCompany(id, companyData);
+  try {
+    const { id } = req.params;
+    const companyData = req.body;
 
-        const updatedCompany = await findCompanyById(id);
+    await updateCompany(id, companyData);
 
-        if (!updatedCompany) {
-            return res.status(404).json({
-                code: 404,
-                title: 'not-found',
-                message: `Company with id ${id} not found`
-            });
-        }
+    const updatedCompany = await findCompanyById(id);
 
-        res.status(200).json({
-            code: 200,
-            title: 'success',
-            message: `Company with id ${id} updated successfully`,
-            data: updatedCompany
-        });
-
-    } catch (error) {
-        next(error);
+    if (!updatedCompany) {
+      return res.status(404).json({
+        code: 404,
+        title: "not-found",
+        message: `Company with id ${id} not found`,
+      });
     }
+
+    res.status(200).json({
+      code: 200,
+      title: "success",
+      message: `Company with id ${id} updated successfully`,
+      data: updatedCompany,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 /**
@@ -127,33 +131,32 @@ const putCompany = async (req, res, next) => {
  * @returns {Promise<void>} Devuelve una respuesta JSON con código 200 si la empresa ha sido eliminada, o 404 si no encuentra la empresa.
  */
 const deleteCompany = async (req, res, next) => {
-    try {
-        const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-        const deletedCompany = await removeCompany(id);
+    const deletedCompany = await removeCompany(id);
 
-        if (deletedCompany === 0) {
-            return res.status(404).json({
-                code: 404,
-                title: 'not-found',
-                message: `Company with id ${id} not found`
-            });
-        }
-        res.status(200).json({
-            code: 200,
-            title: 'success',
-            message: `Company with id ${id} deleted successfully`
-        });
-
-    } catch (error) {
-        next(error);
+    if (deletedCompany === 0) {
+      return res.status(404).json({
+        code: 404,
+        title: "not-found",
+        message: `Company with id ${id} not found`,
+      });
     }
+    res.status(200).json({
+      code: 200,
+      title: "success",
+      message: `Company with id ${id} deleted successfully`,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
-    getAllCompanies,
-    getCompanyById,
-    postCompany,
-    putCompany,
-    deleteCompany
-}
+  getAllCompanies,
+  getCompanyById,
+  postCompany,
+  putCompany,
+  deleteCompany,
+};

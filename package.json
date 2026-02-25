@@ -4,8 +4,11 @@
   "description": "",
   "scripts": {
     "start": "node src/app.js --config config.local.yaml",
-    "dev": "nodemon -e js, yaml src/app.js -- --config config.local.yaml",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon -e js,yaml src/app.js -- --config config.local.yaml",
+    "test:unit": "jest src/test/unit",
+    "test": "npm run test:unit",
+    "lint": "eslint src/",
+    "format": "prettier --write \"src/**/*.js\""
   },
   "keywords": [],
   "author": "",
@@ -18,5 +21,13 @@
     "mysql": "^2.18.1",
     "swagger-ui-express": "^5.0.1",
     "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^10.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.3.0",
+    "jest": "^30.2.0",
+    "prettier": "^3.8.1",
+    "supertest": "^7.2.2"
   }
 }

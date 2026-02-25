@@ -1,24 +1,26 @@
 // Archivo en el que accedemos a la base de datos a por la información requerida y realizamos las operaciones de lógica necesarias.
 
-const db = require('../configuration/database').db;
+const db = require("../configuration/database").db;
 
 /**
  * Metodo para obtener todas las empresas de la base de datos.
  * @returns {Promise<Array>} Devuelve una Promesa que resuelve en un arrray de objetos (empresas).
  */
 const findAllCompanies = async () => {
-    return await db('companies').select('*');
+  return await db("companies").select("*");
 };
 
 /**
  * Metiodo para obtener una empresa por su id.
- * @param {number} id 
+ * @param {number} id
  * @returns {Promise<Object>} Devuelve una Promesa con el objeto de la emprese, o null si no se encuentra.
  */
 const findCompanyById = async (id) => {
-    const company = await db('companies').where({ id: id }).first();
-    if (!company) {return null; }
-    return company;
+  const company = await db("companies").where({ id: id }).first();
+  if (!company) {
+    return null;
+  }
+  return company;
 };
 
 /**
@@ -27,8 +29,8 @@ const findCompanyById = async (id) => {
  * @returns {Promise<number>} Devuelve el ID de la empresa creada.
  */
 const addCompany = async (companyData) => {
-    const [newId] =  await db('companies').insert(companyData);
-    return newId;
+  const [newId] = await db("companies").insert(companyData);
+  return newId;
 };
 
 /**
@@ -37,11 +39,9 @@ const addCompany = async (companyData) => {
  * @param {Object} companyData - Objeto con los datos actualizados de la empresa.
  * @returns {Promise<number>} Devuelve el número de filas afectadas (1 si se actualizó con éxito, 0 si no existía).
  */
-const updateCompany = (async (id, companyData) => {
-    return await db('companies')
-      .where({ id })
-      .update(companyData);
-});
+const updateCompany = async (id, companyData) => {
+  return await db("companies").where({ id }).update(companyData);
+};
 
 /**
  * Elimina una empresa por su id.
@@ -49,13 +49,13 @@ const updateCompany = (async (id, companyData) => {
  * @returns {Promise<number>} Devuelve 1 si se eliminó la empresa, 0 si no se encontró.
  */
 const removeCompany = async (id) => {
-    return await db('companies').where({id}).del();
+  return await db("companies").where({ id }).del();
 };
 
 module.exports = {
-    findAllCompanies,
-    findCompanyById,
-    addCompany,
-    updateCompany,
-    removeCompany
+  findAllCompanies,
+  findCompanyById,
+  addCompany,
+  updateCompany,
+  removeCompany,
 };

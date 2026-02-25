@@ -1,6 +1,13 @@
 // Este archivo implementa todas las operaciones que se han definido en el /router/videogamesRouter.js
 
-const { findAllVideogames, findVideogameById, addVideogame, updateVideogame, removeVideogame } = require('../service/videogamesService');
+const {
+  findAllVideogames,
+  findVideogameById,
+  addVideogame,
+  updateVideogame,
+  removeVideogame,
+} = require("../service/videogamesService");
+const { calculatePriceWithTax } = require("../utils/priceUtils");
 
 /**
  * Obtiene el listado completo de videojuegos.
@@ -13,11 +20,21 @@ const { findAllVideogames, findVideogameById, addVideogame, updateVideogame, rem
 const getAllVideogames = async (req, res, next) => {
   try {
     const videogames = await findAllVideogames();
+
+    const videogamesWithTax = videogames.map((game) => {
+      const taxPrice = calculatePriceWithTax(Number(game.price));
+
+      return {
+        ...game,
+        ...(taxPrice !== null && { priceWithTax: taxPrice }),
+      };
+    });
+
     res.status(200).json({
       code: 200,
-      title: 'success',
-      message: 'Videogames retrieved successfully',
-      data: videogames
+      title: "success",
+      message: "Videogames retrieved successfully",
+      data: videogamesWithTax,
     });
   } catch (error) {
     next(error);
@@ -36,19 +53,28 @@ const getVideogameById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const videogame = await findVideogameById(id);
+
     if (!videogame) {
       return res.status(404).json({
         code: 404,
-        title: 'not-found',
-        message: `Videogame with id ${id} not found`
+        title: "not-found",
+        message: `Videogame with id ${id} not found`,
       });
     }
+
+    const taxPrice = calculatePriceWithTax(Number(videogame.price));
+
+    const videogameWithTax = {
+      ...videogame,
+      ...(taxPrice !== null && { priceWithTax: taxPrice }),
+    };
+
     res.status(200).json({
       code: 200,
-      title: 'success',
-      message: 'Videogame retrieved successfully',
-      data: videogame
-    })
+      title: "success",
+      message: "Videogame retrieved successfully",
+      data: videogameWithTax,
+    });
   } catch (error) {
     next(error);
   }
@@ -67,13 +93,13 @@ const postVideogame = async (req, res, next) => {
     const newId = await addVideogame(req.body);
     const newVideogame = {
       id: newId,
-      ...req.body
+      ...req.body,
     };
     res.status(201).json({
       code: 201,
-      title: 'created',
-      message: 'Videogame created successfully',
-      data: newVideogame
+      title: "created",
+      message: "Videogame created successfully",
+      data: newVideogame,
     });
   } catch (error) {
     next(error);
@@ -100,25 +126,24 @@ const putVideogame = async (req, res, next) => {
     if (!updatedVideogame) {
       return res.status(404).json({
         code: 404,
-        title: 'not-found',
-        message: `Videogame with id ${id} not found after update`
+        title: "not-found",
+        message: `Videogame with id ${id} not found after update`,
       });
     }
 
     res.status(200).json({
       code: 200,
-      title: 'success',
-      message: 'Videogame updated successfully',
-      data: updatedVideogame
+      title: "success",
+      message: "Videogame updated successfully",
+      data: updatedVideogame,
     });
-
   } catch (error) {
     next(error);
   }
 };
 
 /**
- * Elimina un videojuego por su ID. 
+ * Elimina un videojuego por su ID.
  * @param {import('express').Request} req - Objeto de petición.
  * @param {import('express').Response} res - Objeto de respuesta.
  * @param {import('express').NextFunction} next - Función middleware para manejo de errores.
@@ -127,23 +152,22 @@ const putVideogame = async (req, res, next) => {
 const deleteVideogame = async (req, res, next) => {
   try {
     const { id } = req.params;
-    
+
     const deletedCount = await removeVideogame(id);
 
     if (deletedCount === 0) {
       return res.status(404).json({
         code: 404,
-        title: 'not-found',
-        message: `Videogame with id ${id} not found`
+        title: "not-found",
+        message: `Videogame with id ${id} not found`,
       });
     }
 
     res.status(200).json({
       code: 200,
-      title: 'success',
-      message: `Videogame with id ${id} deleted successfully`
+      title: "success",
+      message: `Videogame with id ${id} deleted successfully`,
     });
-
   } catch (error) {
     next(error);
   }
@@ -154,5 +178,5 @@ module.exports = {
   getVideogameById,
   postVideogame,
   putVideogame,
-  deleteVideogame
-}
+  deleteVideogame,
+};
