@@ -17,3 +17,7 @@ function isRetro(releaseDate, referenceDate = new Date()) {
 
     return age >= 20
 }
+
+module.exports = {
+    isRetro
+}
