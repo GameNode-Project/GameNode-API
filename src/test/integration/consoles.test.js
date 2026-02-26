@@ -168,7 +168,7 @@ describe('Integration test for consoles API', () => {
 
       const dbConsole = await db('consoles').where({ id: 1 }).first();
 
-        expect(dbConsole).toBeDefined();
+      expect(dbConsole).toBeDefined();
       expect(dbConsole.name).toBe('PlayStation 5 Updated');
     });
 
