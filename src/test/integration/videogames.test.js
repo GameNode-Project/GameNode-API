@@ -50,6 +50,7 @@ describe('Integration tests for videogames API', () => {
       videogame_id: 1,
       console_id: 1
     });
+
   });
 
   afterAll(async () => {
@@ -60,6 +61,7 @@ describe('Integration tests for videogames API', () => {
   describe('GET /videogames', () => {
 
     test('should return a list of videogames', async () => {
+      
       const response = await request(app).get('/videogames');
       
       expect(response.statusCode).toEqual(200);
@@ -79,6 +81,7 @@ describe('Integration tests for videogames API', () => {
   describe('GET /videogames/:id', () => {
 
     test('should return a single videogame by ID', async () => {
+      
       const response = await request(app).get('/videogames/1');
       
       expect(response.statusCode).toEqual(200);
@@ -87,22 +90,27 @@ describe('Integration tests for videogames API', () => {
       expect(response.body).toHaveProperty('data');
       expect(response.body.data.title).toBe('Zelda: Breath of the Wild');
       expect(response.body.data).toHaveProperty('priceWithTax');
+    
     });
 
     test('should return 404 if videogame not found', async () => {
+      
       const response = await request(app).get('/videogames/999');
       
       expect(response.statusCode).toEqual(404);
       expect(response.body.title).toBe('not-found');
       expect(response.body.message).toBe('Videogame with id 999 not found');
+    
     });
 
     test('should return 400 for invalid ID', async () => {
+      
       const response = await request(app).get('/videogames/invalid');
       
       expect(response.statusCode).toEqual(400);
       expect(response.body.title).toBe('validation error');
       expect(Array.isArray(response.body.errors)).toBe(true);
+    
     });
 
   });
@@ -256,6 +264,7 @@ describe('Integration tests for videogames API', () => {
 
       const dbRelation = await db('videogame_console').where({ videogame_id: 1 }).first();
       expect(dbRelation).toBeUndefined(); 
+    
     });
 
     test('should return 404 if videogame is already deleted or not found', async () => {
@@ -264,6 +273,7 @@ describe('Integration tests for videogames API', () => {
 
       expect(response.statusCode).toEqual(404);
       expect(response.body.title).toBe('not-found');
+    
     });
 
   });
