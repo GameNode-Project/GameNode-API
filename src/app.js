@@ -38,7 +38,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = config.service.port || 8080;
+const PORT = process.env.PORT || config.service?.port || 8080;
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
