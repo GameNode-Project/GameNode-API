@@ -1,28 +1,42 @@
-# 🎮 GameNode API
+# GameNode
+
+<div align="center">
+
+<img src="./docs/api/logo-gamenode.png" alt="GameNode Logo" width="250"/>
+
+**API RESTful para la gestión integral de un catálogo y foro de videojuegos**
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white)
-![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
-![Railway](https://img.shields.io/badge/Railway-131415?style=for-the-badge&logo=railway&logoColor=white)
+
+[Despliegue en Producción](#produccion) •
+[Stack Tecnológico](#stack) •
+[Instalación y Entorno Local](#instalacion) •
+[Testing Automático](#testing) •
+[Documentación Adicional](#documentacion) •
+[Arquitectura del Proyecto](#arquitectura) •
+[Contribuciones y Flujo de Trabajo](#contribuciones)
+
+</div>
+
+---
+
+## 📋 Descripción
 
 GameNode API es un backend robusto diseñado para gestionar un catálogo completo de la industria de los videojuegos. Permite la administración de **Empresas**, **Consolas** y **Videojuegos**, gestionando de forma eficiente sus relaciones a través de una base de datos relacional MariaDB.
 
 Este proyecto ha sido desarrollado aplicando buenas prácticas de Ingeniería de Software, incluyendo **Arquitectura en Capas** (Router, Controller, Service), **Integridad Referencial**, **CI/CD** y **Testing automatizado**.
 
----
-
-## 🚀 Despliegue en Producción (Live Demo)
+## <a name="produccion"></a>🚀 Despliegue en Producción (Live Demo)
 
 La API está desplegada de forma continua y automatizada en **Railway**. 
 
-* **URL Base de la API:** `https://TU-URL-DE-RAILWAY.up.railway.app` *(⚠️ Reemplaza esto con tu URL de Railway)*
-* **Documentación Swagger UI:** `https://TU-URL-DE-RAILWAY.up.railway.app/api-docs`
+* **URL Base de la API:** `https://gamenode-api-production.up.railway.app/`
+* **Documentación Swagger UI:** `https://gamenode-api-production.up.railway.app//api-docs`
 
----
-
-## 🛠️ Stack Tecnológico
+## <a name="stack"></a>🛠️ Stack Tecnológico
 
 * **Core:** Node.js, Express.js
 * **Base de Datos:** MariaDB (Despliegue local con Docker, Producción en Railway)
@@ -32,9 +46,8 @@ La API está desplegada de forma continua y automatizada en **Railway**.
 * **CI/CD:** GitHub Actions (Node 20, 22, 24)
 * **Documentación:** Swagger (OpenAPI 3.0), Postman
 
----
 
-## ⚙️ Instalación y Entorno Local (Getting Started)
+## <a name="instalacion"></a>⚙️ Instalación y Entorno Local
 
 Para levantar este proyecto en tu entorno local, sigue estos pasos:
 
@@ -93,7 +106,7 @@ npm start
 
 La API estará disponible en **http://localhost:8080** (o el puerto definido en tu configuración).
 
-## 🧪 Testing Automático
+## <a name="testing"></a>🧪 Testing Automático
 
 El proyecto cuenta con una suite completa de pruebas (Unitarias y de Integración) gestionadas con Jest y Supertest.
 
@@ -119,15 +132,15 @@ npm run test:integration
 
 (Se utiliza la librería cross-env para garantizar compatibilidad entre terminales Windows, Mac y Linux al inyectar NODE_ENV=test).
 
-## 📚 Documentación Adicional
+## <a name="documentacion"></a>📚 Documentación Adicional
 
 Para mantener la raíz del proyecto limpia, la documentación detallada se encuentra dividida en sus respectivos directorios:
 
-* 📄 Documentación de la API y Postman: Contiene las especificaciones **OpenAPI (Swagger)**, instrucciones de uso y la **Colección de Postman con los tests preconfigurados**.
+* 📄  [<u>**Documentación de la API y Postman**</u>](./docs/api/README.md): Contiene las especificaciones **OpenAPI (Swagger)**, instrucciones de uso y la **Colección de Postman con los tests preconfigurados**.
 
-* 🗄️ Documentación de la Base de Datos: Detalles sobre el **Modelo Entidad-Relación**, el **script init.sql** y **decisiones de diseño e integridad referencial** (borrados controlados).
+* 🗄️  [<u>**Documentación de la Base de Datos**</u>](./docs/database/README.md): Detalles sobre el **Modelo Entidad-Relación**, el **script init.sql** y **decisiones de diseño e integridad referencial** (borrados controlados).
 
-## 🏗️ Arquitectura del Proyecto
+## <a name="arquitectura"></a>🏗️ Arquitectura del Proyecto
 
 El código fuente sigue el patrón de diseño estructurado en capas para garantizar escalabilidad y separación de responsabilidades:
 
@@ -146,7 +159,7 @@ src/
       └── unit/             # Pruebas de funciones lógicas puras
 ```
 
-## ✨ Contribuciones y Flujo de Trabajo (GitFlow)
+## <a name="contribuciones"></a> ✨ Contribuciones y Flujo de Trabajo
 
 * La rama **main** contiene únicamente código de Producción (estable).
 
