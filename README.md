@@ -167,6 +167,10 @@ src/
 
 * Los despliegues se validan mediante GitHub Actions en cada Pull Request (Wait for CI) para asegurar que ningún código que rompa los tests llegue a producción.
 
+## <a name="licecia"></a>📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](./LICENSE) para más detalles.
+
 ---
 
 *Desarrollado para el proyecto de 2ªEV Desarrollo de Aplicaciones Web (Backend).*
