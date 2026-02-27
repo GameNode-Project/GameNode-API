@@ -33,8 +33,22 @@ Este proyecto ha sido desarrollado aplicando buenas prácticas de Ingeniería de
 
 La API está desplegada de forma continua y automatizada en **Railway**. 
 
-* **URL Base de la API:** `https://gamenode-api.up.railway.app/`
-* **Documentación Swagger UI:** `https://gamenode-api.up.railway.app/api-docs/`
+* **URL Base de la API:** [`https://gamenode-api.up.railway.app`](https://gamenode-api.up.railway.app)
+
+  * **URL Datos JSON Videojuegos:** [`https://gamenode-api.up.railway.app/videogames`](https://gamenode-api.up.railway.app/videogames)
+  * **URL Datos JSON Consolas:** [`https://gamenode-api.up.railway.app/consoles`](https://gamenode-api.up.railway.app/consoles)
+  * **URL Datos JSON Compañías:** [`https://gamenode-api.up.railway.app/companies`](https://gamenode-api.up.railway.app/companies)
+
+  * **Búsqueda por registro específico:**
+  
+    * **Videojuego Específico:** `https://gamenode-api.up.railway.app/videogames/:id` *(Ej: [Ver ID 1](https://gamenode-api.up.railway.app/videogames/1))*
+    * **Consola Específica:** `https://gamenode-api.up.railway.app/consoles/:id` *(Ej: [Ver ID 1](https://gamenode-api.up.railway.app/consoles/1))*
+    * **Compañía Específica:** `https://gamenode-api.up.railway.app/companies/:id` *(Ej: [Ver ID 1](https://gamenode-api.up.railway.app/companies/1))*
+
+    > [!NOTE]
+    > Debes reemplazar **`:id`** por un ID numérico válido. La base de datos inicial contiene registros con ID del **1** al **10**.
+
+* **Documentación Swagger UI:** [`https://gamenode-api.up.railway.app/api-docs`](https://gamenode-api.up.railway.app/api-docs)
 
 ## <a name="stack"></a>🛠️ Stack Tecnológico
 
