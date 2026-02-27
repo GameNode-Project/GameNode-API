@@ -4,7 +4,7 @@
 
 <img src="./docs/api/logo-gamenode.png" alt="GameNode Logo" width="250"/>
 
-**API RESTful para la gestión integral de un catálogo y foro de videojuegos**
+**API RESTful para la gestión integral de un catálogo y foro de videojuegos, consolas y compañias.**
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
